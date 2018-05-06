@@ -40,20 +40,20 @@
 </template>
 
 <script>
-  import {Auth} from "./Auth";
+import {Auth} from "./Auth";
 
-  export default {
-    name: 'index',
-    computed: {
-      isLoggedIn () {
-        return Auth.check.isAuthenticated()
-      }
-    },
-    methods: {
-      logout() {
-        Auth.clear.accessToken()
-        window.location.href = '/';
-      }
+export default {
+  name: 'index',
+  computed: {
+    isLoggedIn () {
+      return Auth.check.isAuthenticated()
+    }
+  },
+  methods: {
+    logout () {
+      Auth.clear.accessToken()
+      window.location.href = '/'
     }
   }
+}
 </script>

@@ -7,11 +7,10 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post(API.login, payload)
         .then(response => {
-          console.log(response.data);
-          Auth.set.accessToken(response.data.token);
+          Auth.set.accessToken(response.data.token)
 
           if (response.data.success) {
-            commit('updateToken', response.data.token);
+            commit('updateToken', response.data.token)
             resolve(response)
           }
         }).catch(error => {
@@ -24,7 +23,7 @@ export default {
       axios.post(API.register, payload)
         .then(response => {
           if (response.data.success) {
-            commit('newNotification', response.data.message);
+            commit('newNotification', response.data.message)
             resolve(response)
           }
         }).catch(error => {
@@ -37,31 +36,40 @@ export default {
       Auth.get.bearer();
       axios.post(API.websites, payload)
         .then(response => {
-          console.log(response);
           if (response.data.success) {
-            commit('updateWebsite', response.data.data);
+            commit('updateWebsite', response.data.data)
             resolve(response)
           }
         }).catch(error => {
-        if (error.response&&error.response.data.success)
-          reject(error.response.data.error)
-        reject(error)
+         reject(error)
       })
     })
   },
   getWebsites ({commit}) {
     return new Promise((resolve, reject) => {
-      Auth.get.bearer();
-      window.axios.get(API.websites)
+      Auth.get.bearer()
+      axios.get(API.websites)
         .then(response => {
           if (response.data.success) {
-            commit('updateWebsites', response.data.data);
+            commit('updateWebsites', response.data.data)
             resolve(response)
           }
         })
         .catch(error => {
-          if (error.response&&error.response.data.success)
-            reject(error.response.data.error)
+          reject(error)
+        })
+    })
+  },
+  getWebsite ({commit}, id) {
+    return new Promise((resolve, reject) => {
+      Auth.get.bearer()
+      axios.get(API.websites + '/' + id)
+        .then(response => {
+          if (response.data.success) {
+            resolve(response.data.data)
+          }
+        })
+        .catch(error => {
           reject(error)
         })
     })

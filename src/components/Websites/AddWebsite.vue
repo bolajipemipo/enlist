@@ -7,7 +7,7 @@
             <div class="font-w600 mt-2 text-uppercase text-muted">Share A Website</div>
             <div class="font-w300 text-muted">Share an amazing website for everyone to visit!</div>
             <br>
-            <div class="card card-shadow">
+            <div class="card card-shadow mb-5">
               <form class="card-block" @submit.prevent="submitted">
                 <p class="text-danger" v-if="errors.server_error">{{errors.server_error}}</p>
                 <div class="form-group">
@@ -31,7 +31,6 @@
               </form>
             </div>
 
-            <br /><br /><br /><br />
         </div>
           <div class="col-md-2"></div>
         </div>
@@ -49,23 +48,21 @@ export default {
     }
   },
   computed: {
-    notAllSet() {
-      return (this.website.name === '') || (this.website.url === '') || (this.website.description === '');
-    },
+    notAllSet () {
+      return (this.website.name === '') || (this.website.url === '') || (this.website.description === '')
+    }
   },
   methods: {
     submitted () {
-      this.connecting = true;
-      this.errors.server_error = null;
+      this.connecting = true
+      this.errors.server_error = null
       this.$store.dispatch('postWebsite', this.website)
         .then(response => this.$router.push('/websites'))
         .catch(error => {
-          this.connecting = false;
-          if (error.response&&error.response.data.success)
-            this.errors.server_error = error.response.data.error
-          else
-            this.errors.server_error = 'Something went wrong.';
-      });
+          this.connecting = false
+          if (error.response && error.response.data.success) this.errors.server_error = error.response.data.error
+          else this.errors.server_error = 'Something went wrong.'
+        })
     }
   }
 }

@@ -9,7 +9,7 @@
               <div class="font-w300 text-muted">Login to view listing.</div>
             </div>
             <br>
-            <div class="card card-shadow">
+            <div class="card card-shadow mb-5">
               <form class="card-block" @submit.prevent="submitted">
 
                 <div class="alert alert-info" v-if="locationIntended">
@@ -17,7 +17,7 @@
                 </div>
 
                 <p class="text-success" v-if="newNotification">{{newNotification}}</p>
-                <p class="text-warning" v-if="errors.server_error">{{errors.server_error}}</p>
+                <p class="text-danger" v-if="errors.server_error">{{errors.server_error}}</p>
 
                 <div class="form-group" :class="{ 'has-error': errors.email }">
                   <label for="Email">Email</label>
@@ -37,8 +37,6 @@
                 <router-link to="/register" class="btn btn-default">Create Account</router-link>
               </form>
             </div>
-
-            <br /><br /><br /><br />
         </div>
           <div class="col-md-3"></div>
         </div>
@@ -58,20 +56,20 @@ export default {
     }
   },
   computed: {
-    notAllSet() {
-      return !Auth.check.isEmailValid(this.user.email) || !Auth.check.isPasswordValid(this.user.password);
+    notAllSet () {
+      return !Auth.check.isEmailValid(this.user.email) || !Auth.check.isPasswordValid(this.user.password)
     },
-    newNotification() {
+    newNotification () {
       return this.$store.getters.general_notification
     },
-    locationIntended() {
+    locationIntended () {
       return Auth.get.URLIntended()
     },
     emailFormatError () {
       if ((this.user.email !== '') && !Auth.check.isEmailValid(this.user.email)) { this.errors.email = Auth.generate.InvalidEmailError(); return true }
-      this.errors.email = null;
-      return false;
-    },
+      this.errors.email = null
+      return false
+    }
   },
   methods: {
     submitted () {
@@ -84,12 +82,10 @@ export default {
           window.location.href = to
         }).catch(error => {
           this.connecting = false;
-          if (error.response&&error.response.data.success)
-            this.errors.server_error = error.response.data.error
-          else
-            this.errors.server_error = 'Something went wrong.';
+          if (error.response && error.response.data.success) this.errors.server_error = error.response.data.error
+          else this.errors.server_error = 'Something went wrong.'
       });
     }
-  },
+  }
 }
 </script>

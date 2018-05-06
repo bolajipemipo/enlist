@@ -5,20 +5,11 @@ import App from './App'
 import router from './router'
 import { store } from './store/store'
 import axios from 'axios'
-import API from './network/API'
-import {Auth} from "./Auth";
 
 // axios.defaults.baseURL = 'http://localhost:8009'
 axios.defaults.baseURL = 'https://mt-proc.herokuapp.com';
-window.axios = axios;
-window.API = API;
-Vue.use(axios);
-Vue.use(Auth);
+Vue.use(axios)
 Vue.config.productionTip = false;
-
-// require('./assets/layout3/css/layout.min.css')
-
-// router.beforeEach(
 
 /* eslint-disable no-new */
 new Vue({
@@ -26,8 +17,6 @@ new Vue({
   router,
   store,
   axios,
-  Auth,
-  API,
   components: { App },
   template: '<App/>'
 });

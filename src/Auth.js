@@ -7,8 +7,8 @@ export const Auth = {
     },
     bearer () {
       axios.interceptors.request.use(function (config) {
-        config.headers.Authorization = 'Bearer ' + Auth.get.accessToken();
-        return config;
+        config.headers.Authorization = 'Bearer ' + Auth.get.accessToken()
+        return config
       });
     },
     URLIntended () {
@@ -38,37 +38,37 @@ export const Auth = {
       return !!(localStorage.getItem('KEY_TOKEN'))
     },
     isEmailValid (email) {
-      return this._validateEmail(email);
+      return this._validateEmail(email)
     },
     doPasswordsMatch (password, password_confirmation) {
-      return (password === password_confirmation);
+      return (password === password_confirmation)
     },
     isPasswordValid (password) {
-      if ((password !== '') && (password.length >= 6)) return true;
+      if ((password !== '') && (password.length >= 6)) return true
     },
-    _validateEmail(email) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
+    _validateEmail (email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(String(email).toLowerCase())
     }
   },
   generate: {
     /**
      * @return {string}
      */
-    InvalidPasswordError() {
-      return 'Password should be more than 5 Characters.';
+    InvalidPasswordError () {
+      return 'Password should be more than 5 Characters.'
     },
     /**
      * @return {string}
      */
-    InvalidEmailError() {
-      return 'Email not in right format yet.';
+    InvalidEmailError () {
+      return 'Email not in right format yet.'
     },
     /**
      * @return {string}
      */
-    InvalidPasswordMatchError() {
-      return 'Passwords don\'t match yet.';
+    InvalidPasswordMatchError () {
+      return 'Passwords don\'t match yet.'
     }
   }
-};
+}
